@@ -1,8 +1,8 @@
-#searchResults{
-     background: #F0F0F0;
-     color: #686868;
-    padding-top: 10px;
-    padding-bottom: 10px;
+#searchResult{
+    background: #F0F0F0;
+    color: #686868;
+    padding: 10px;
+    margin: 10px;
 }
 #textDiv{
     padding-left: 0px;

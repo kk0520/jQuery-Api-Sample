@@ -4,8 +4,8 @@ let $searchBtn = $("#searchBtn");
 
 
 $searchBtn.click (() => {
+    $("#target").empty();
     const name = $title.val();
-    console.log(name)
     $.ajax({
         url : 'http://www.omdbapi.com/',
         type : 'GET',
@@ -17,11 +17,7 @@ $searchBtn.click (() => {
 })
 
 function handleSearchData(data) {
-    //console.log("Data", data.Search);
     let searchResults = data.Search;
-    // for(d in data.Search) {
-    //     console.log(data.Search[d].Title);
-    // }
     searchResults.forEach(handleSingleSearchresult);
 }
 
@@ -30,5 +26,18 @@ function handleApiError(request,error) {
 }
 
 function handleSingleSearchresult(result) {
-    console.log("Title : ", result.Title);
+    console.log("Incoming Result" ,result);
+    let $iconString;
+    if (result.Type=="movie"){
+        $iconString = "fa-film"
+
+    }else if(result.Type=="series"){
+        $iconString = "fa-tv"
+    }
+    else {
+        $iconString = "fa-gamepad"
+    }
+    result.Icon = $iconString;
+    console.log("Result for Template", result);
+    $.tmpl($("#template"),result ).appendTo("#target");
 }
