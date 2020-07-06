@@ -18,7 +18,11 @@ $searchBtn.click (() => {
 
 function handleSearchData(data) {
     let searchResults = data.Search;
+    let totalRecords = data.totalResults;
+    handlePagination(totalRecords);
     searchResults.forEach(handleSingleSearchresult);
+
+
 }
 
 function handleApiError(request,error) {
@@ -26,7 +30,6 @@ function handleApiError(request,error) {
 }
 
 function handleSingleSearchresult(result) {
-    console.log("Incoming Result" ,result);
     let $iconString;
     if (result.Type=="movie"){
         $iconString = "fa-film"
@@ -38,6 +41,19 @@ function handleSingleSearchresult(result) {
         $iconString = "fa-gamepad"
     }
     result.Icon = $iconString;
-    console.log("Result for Template", result);
-    $.tmpl($("#template"),result ).appendTo("#target");
+    $.tmpl($("#displaytemplate"),result ).appendTo("#resultList");
+}
+
+function handlePagination(totalRecords){
+    let $pageNumber;
+    if(totalRecords%10 == 0)
+    $pageNumber = totalRecords/10;
+    else{
+        $pageNumber = Math.ceil(totalRecords/10)
+    }
+    console.log($pageNumber);
+    for(let i=1; i<= $pageNumber; i++){
+        var pageNumber = { "page"  : i};
+        $.tmpl($("#paginationTemplate"),pageNumber ).appendTo("#paginationDiv");
+    }
 }

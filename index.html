@@ -16,12 +16,15 @@
             <button id="searchBtn" class="btn btn-success" type="submit">Go</button>
         </div>
     </div>
-
-    <div id="target"></div>
+    <div id="resultList"></div>
+    <nav aria-label="Page navigation example">
+        <ul id="paginationDiv" class="pagination justify-content-center">
+        </ul>
+    </nav>
 
 </div>
 
-<script id="template" type="text/html">
+<script id="displaytemplate" type="text/html">
     <div id="searchResult" class="border border-dark rounded ">
         <div id="singleResultContent" class="row">
             <div id="imgDiv" class="col-2">
@@ -32,10 +35,14 @@
                 <p class="list-group-item-text">${Year}</p>
                 <p class="list-group-item-text">${Type}</p>
                 <i class='fas ${Icon}' style='font-size:24px'></i>
-
             </div>
         </div>
     </div>
+
+</script>
+
+<script id="paginationTemplate" type="text/html">
+    <li class="page-item"><a class="page-link" href="#">${page}</a></li>
 </script>
 
 <script
