@@ -69,6 +69,6 @@ function pageClick(pageNumber){
 
 
 function detailsClick(id){
-    window.open("DetailsPage.html?imdbId="+id)
+    window.open("detailsPage.html?imdbId="+id)
 
 }
