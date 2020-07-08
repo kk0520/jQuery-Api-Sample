@@ -7,3 +7,16 @@
 #textDiv{
     padding-left: 0px;
 }
+
+#ImageDiv{
+    margin: 10px;
+}
+
+#DetailsText{
+    margin: 10px
+ }
+
+#detailsDiv{
+    background: #F0F0F0;
+    margin-top: 10px;
+}

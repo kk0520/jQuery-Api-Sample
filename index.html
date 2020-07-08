@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-    <h1 align="center">MOVIE SEARCH</h1>
+<h1 align="center">MOVIE SEARCH</h1>
     <div class="input-group mb-3">
         <input id="nameVal" type="text" class="form-control" placeholder="Search">
         <div class="input-group-append">
@@ -25,8 +25,8 @@
 </div>
 
 <script id="displaytemplate" type="text/html">
-    <div id="searchResult" class="border border-dark rounded ">
-        <div id="singleResultContent" class="row">
+    <div id="searchResult" class="border border-dark rounded" onclick="detailsClick('${imdbID}')" style="cursor: pointer">
+        <div id="singleResultContent" class="row" >
             <div id="imgDiv" class="col-2">
                 <img src= "${Poster}" class="rounded float-right" width="150" height="150">
             </div>

@@ -17,17 +17,16 @@ function getMovieData(pageNumber){
         error : handleApiError
     });
 }
+
 function handleSearchData(data) {
     let searchResults = data.Search;
     let totalRecords = data.totalResults;
     handlePagination(totalRecords);
     searchResults.forEach(handleSingleSearchresult);
 }
-
 function handleApiError(request,error) {
 
 }
-
 function handleSingleSearchresult(result) {
     let $iconString;
     if (result.Type=="movie"){
@@ -62,9 +61,14 @@ function handlePagination(totalRecords){
         $.tmpl($("#paginationTemplate"),pageNumber ).appendTo("#paginationDiv");
     }
 }
-
 function pageClick(pageNumber){
     $("#resultList").empty();
     $("#paginationDiv").empty();
     getMovieData(pageNumber);
+}
+
+
+function detailsClick(id){
+    window.open("DetailsPage.html?imdbId="+id)
+
 }
