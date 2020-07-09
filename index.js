@@ -12,17 +12,24 @@ function getMovieData(pageNumber){
         url : 'http://www.omdbapi.com/',
         type : 'GET',
         dataType:'json',
-        data: $.param({ apikey: 'd8a727ad', s: name, page: pageNumber}),
+        data: $.param({ apikey: 'xxxxxxx', s: name, page: pageNumber}), // 'xxxxxxxx' use your OMDb Api key
         success : handleSearchData,
         error : handleApiError
     });
 }
 
 function handleSearchData(data) {
-    let searchResults = data.Search;
-    let totalRecords = data.totalResults;
-    handlePagination(totalRecords);
-    searchResults.forEach(handleSingleSearchresult);
+    if(data.Response == "False")
+    {
+        $('#paginationDiv').empty();
+        $.tmpl($("#noResultErrorTemplate"),data ).appendTo("#resultList");
+    }
+    else {
+        let searchResults = data.Search;
+        let totalRecords = data.totalResults;
+        handlePagination(totalRecords);
+        searchResults.forEach(handleSingleSearchresult);
+    }
 }
 function handleApiError(request,error) {
 
@@ -49,10 +56,11 @@ function handleSingleSearchresult(result) {
     $.tmpl($("#displaytemplate"),result ).appendTo("#resultList");
 }
 
+
 function handlePagination(totalRecords){
     let $pageNumber;
     if(totalRecords%10 == 0)
-    $pageNumber = totalRecords/10;
+        $pageNumber = totalRecords/10;
     else{
         $pageNumber = Math.ceil(totalRecords/10)
     }
@@ -61,14 +69,13 @@ function handlePagination(totalRecords){
         $.tmpl($("#paginationTemplate"),pageNumber ).appendTo("#paginationDiv");
     }
 }
+
 function pageClick(pageNumber){
     $("#resultList").empty();
     $("#paginationDiv").empty();
     getMovieData(pageNumber);
 }
 
-
 function detailsClick(id){
     window.open("detailsPage.html?imdbId="+id)
-
 }
